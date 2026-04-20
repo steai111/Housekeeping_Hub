@@ -1,0 +1,55 @@
+{
+  "status": "ok",
+  "difficulty": "MEDIUM",
+  "units": [
+    {
+      "unit_name": "CAMERA 1",
+      "booking_status": "Check-in",
+      "cleaning_task": "Da rifare",
+      "language": "IT",
+      "beddy_notes": "Letti separati fattura"
+    },
+    {
+      "unit_name": "CAMERA 2",
+      "booking_status": "Check-in",
+      "cleaning_task": "Da rifare",
+      "language": "ENG",
+      "beddy_notes": "Viaggio di nozze"
+    },
+    {
+      "unit_name": "CAMERA 3",
+      "booking_status": "Check-in",
+      "cleaning_task": "Da rifare",
+      "language": "ENG",
+      "beddy_notes": ""
+    },
+    {
+      "unit_name": "CAMERA 4",
+      "booking_status": "Pernottamento",
+      "cleaning_task": "Rassetto",
+      "language": "ENG",
+      "beddy_notes": "X1"
+    },
+    {
+      "unit_name": "APP 5",
+      "booking_status": "Vuota",
+      "cleaning_task": "Niente",
+      "language": "-",
+      "beddy_notes": ""
+    },
+    {
+      "unit_name": "APP 6",
+      "booking_status": "Vuota",
+      "cleaning_task": "Niente",
+      "language": "-",
+      "beddy_notes": ""
+    },
+    {
+      "unit_name": "APP 7",
+      "booking_status": "Pernottamento",
+      "cleaning_task": "Niente",
+      "language": "ENG",
+      "beddy_notes": "Cane e culla X2"
+    }
+  ]
+}

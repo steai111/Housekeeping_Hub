@@ -22,11 +22,13 @@ def root():
 
 @app.get("/api/daily")
 def daily_view():
-    rows = build_daily_view()
-    difficulty = calculate_day_difficulty(rows)
+    import json
+    from pathlib import Path
 
-    return {
-        "status": "ok",
-        "difficulty": difficulty,
-        "units": rows
-    }
+    file_path = Path("data/daily.json")
+
+    if not file_path.exists():
+        return {"status": "error", "message": "daily.json not found"}
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
