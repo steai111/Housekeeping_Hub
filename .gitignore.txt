@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Playwright session / secrets
+data/session/
+app/*credentials.py
+app/*password*.py
+
+# Logs
+logs/
+*.log
+
+# Xcode / iOS
+ios/**/DerivedData/
+ios/**/*.xcuserstate
+ios/**/*.xcworkspace/xcuserdata/
+
+# Cursor / editor
+.vscode/
+.idea/
