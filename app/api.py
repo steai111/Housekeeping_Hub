@@ -31,4 +31,6 @@ def daily_view():
         return {"status": "error", "message": "daily.json not found"}
 
     with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        payload = json.load(f)
+
+    return payload

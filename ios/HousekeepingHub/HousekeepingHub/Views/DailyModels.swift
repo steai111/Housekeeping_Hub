@@ -2,6 +2,7 @@ import Foundation
 
 struct DailyResponse: Codable {
     let status: String
+    let date: String
     let difficulty: String
     let units: [DailyUnit]
 }

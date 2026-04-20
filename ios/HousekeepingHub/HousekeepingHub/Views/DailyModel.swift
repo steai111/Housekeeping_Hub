@@ -4,6 +4,7 @@ import Foundation
 final class DailyViewModel: ObservableObject {
     
     @Published var loading = false
+    @Published var date = "-"
     @Published var difficulty = "-"
     @Published var units: [DailyUnit] = []
     
@@ -19,6 +20,7 @@ final class DailyViewModel: ObservableObject {
             let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
             
             difficulty = decoded.difficulty
+            date = decoded.date
             units = decoded.units
             
         } catch {
