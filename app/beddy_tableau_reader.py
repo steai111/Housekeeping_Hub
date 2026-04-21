@@ -42,10 +42,10 @@ def _close_tableau_popup(page: Page) -> None:
     page.wait_for_timeout(700)
 
 
-def _find_target_column_index(headers_text: List[str], target_day: int) -> int | None:
+def _find_target_day_header_index(day_headers_text: List[str], target_day: int) -> int | None:
     target_header_text = f"{target_day} "
 
-    for index, text in enumerate(headers_text, start=1):
+    for index, text in enumerate(day_headers_text):
         clean_text = " ".join(text.split())
         if clean_text.startswith(target_header_text):
             return index
@@ -95,12 +95,21 @@ def read_target_day_bookings() -> List[Dict[str, Any]]:
             if clean_text:
                 print(f"{index}: {clean_text}")
 
-        target_column_index = _find_target_column_index(headers_text, target_day)
-        if target_column_index is None:
+        day_headers = page.locator("th.by-tableau-cell--day")
+        day_headers_text = day_headers.all_inner_texts()
+
+        print("HEADER GIORNI TROVATI NEL TABLEAU:")
+        for index, text in enumerate(day_headers_text, start=1):
+            clean_text = " ".join(text.split())
+            if clean_text:
+                print(f"{index}: {clean_text}")
+
+        target_day_header_index = _find_target_day_header_index(day_headers_text, target_day)
+        if target_day_header_index is None:
             print(f"ERRORE: nessuna colonna trovata per il giorno {target_day}")
             return []
 
-        print(f"COLONNA TARGET TROVATA: index={target_column_index}")
+        print(f"HEADER TARGET TROVATO: index={target_day_header_index}")
 
         page.wait_for_timeout(3000)
         page.wait_for_selector("div.by-tableau-reservation.by-tableau-box", timeout=10000)
@@ -109,8 +118,6 @@ def read_target_day_bookings() -> List[Dict[str, Any]]:
         boxes_count = reservation_boxes.count()
         print(f"BOX PRENOTAZIONE VISIBILI: {boxes_count}")
 
-        day_headers = page.locator("th.by-tableau-cell--day")
-        target_day_header_index = target_column_index - 5
         target_box = day_headers.nth(target_day_header_index).bounding_box()
 
         if not target_box:

@@ -2,6 +2,34 @@ import SwiftUI
 
 struct BathroomOSView: View {
     
+    private let steps: [String] = [
+        "Spruzzare ganci + interno wc con prodotto + spazzolare con lo scopino.",
+        "Picchiare scopino sui bordi interni + mettere a scolare sotto l’asse.",
+        "Anticalcare spray nel lavandino, nel bidet, pareti doccia e pavimento doccia.",
+        "Straccio rosa: passare lavandino.",
+        "Straccio rosa: passare bidet.",
+        "Straccio rosa: passare doccia.",
+        "Sciacquare con doccino le pareti della doccia (anche i muri).",
+        "Con spruzzino wc spruzzare scopino e metterlo nel bidet.",
+        "Con spruzzino sciacquare interno wc + tirare sciacquone.",
+        "Con straccio grigio ripassare tutto il wc dentro e fuori + asse + pavimento fondo pavimento.",
+        "Con straccio grigio pulire contenitore scopino.",
+        "Rimettere scopino nel contenitore.",
+        "Straccio rosa: passare tutto il lavandino dentro fuori sopra sotto. Se tanti peli usare carta prima.",
+        "Straccio rosa: passare tutto il bidet.",
+        "Passare vetri della doccia con tira vetri.",
+        "Straccio doccia blu umido: passare vetri e pareti della doccia.",
+        "Controllare contro luce pareti vetro doccia.",
+        "Passare tiravetri pavimento doccia. Ogni tanto controllare piletta. Se ci sono troppi peli usare carta.",
+        "Straccio per asciugare azzurro: asciugare tutto.",
+        "Asciugare gabinetto con carta.",
+        "Alcool 70% + panno azzurro/verde: passare specchio.",
+        "Pulire piedini tavolino di legno e sotto al cestino con carta già usata.",
+        "Spruzzare wc con candeggina e lasciarla dentro."
+    ]
+    
+    @State private var currentStepIndex: Int = 0
+    
     var body: some View {
         VStack(spacing: 24) {
             
@@ -15,17 +43,17 @@ struct BathroomOSView: View {
             .padding(.top)
             
             VStack(spacing: 10) {
-                Text("Step 1 / 23")
+                Text("Step \(displayStep) / \(steps.count)")
                     .font(.headline)
                 
-                ProgressView(value: 1, total: 23)
+                ProgressView(value: Double(progressValue), total: Double(steps.count))
             }
             .padding(.horizontal)
             
             Spacer()
             
             VStack(spacing: 16) {
-                Text("Spruzzare ganci + interno wc con prodotto + spazzolare con lo scopino.")
+                Text(currentStepText)
                     .font(.title3.weight(.semibold))
                     .multilineTextAlignment(.center)
                     .padding()
@@ -39,17 +67,63 @@ struct BathroomOSView: View {
             Spacer()
             
             HStack(spacing: 12) {
-                Button("Indietro") {
+                Button {
+                    if currentStepIndex > 0 {
+                        currentStepIndex -= 1
+                    }
+                } label: {
+                    Text("Indietro")
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(width: 110, height: 44)
                 }
-                .buttonStyle(.bordered)
+                .background(Color.white)
+                .foregroundColor(.black)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.black, lineWidth: 1)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
                 
-                Button("Avanti") {
+                Button {
+                    if currentStepIndex < steps.count {
+                        currentStepIndex += 1
+                    }
+                } label: {
+                    Text("Avanti")
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(width: 110, height: 44)
                 }
-                .buttonStyle(.borderedProminent)
+                .background(Color.black)
+                .foregroundColor(.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.white, lineWidth: 1)
+    
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             .padding(.bottom)
         }
         .padding()
+    }
+    
+    var currentStepText: String {
+        if currentStepIndex >= steps.count {
+            return "Procedura completata."
+        }
+        return steps[currentStepIndex]
+    }
+    
+    var displayStep: Int {
+        min(currentStepIndex + 1, steps.count)
+    }
+    
+    var progressValue: Int {
+        min(currentStepIndex + 1, steps.count)
     }
 }
 

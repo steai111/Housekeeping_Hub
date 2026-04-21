@@ -55,8 +55,8 @@ struct DailyTaskView: View {
                     
                     // Summary
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Riassunto Operativo")
-                            .font(.headline)
+                        Text("RIASSUNTO OPERATIVO")
+                            .font(.headline.bold())
                         
                         Text("Da rifare: \(daRifareCount)")
                         Text("Smontare: \(smontareCount)")
