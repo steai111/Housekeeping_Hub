@@ -76,50 +76,7 @@ struct DailyTaskView: View {
                         VStack(spacing: 12) {
                             ForEach(vm.units) { unit in
                                 NavigationLink {
-                                    ScrollView {
-                                        VStack(spacing: 16) {
-                                            
-                                            VStack(alignment: .leading, spacing: 6) {
-                                                Text(unit.unit_name)
-                                                    .font(.largeTitle.bold())
-                                                
-                                                Text(unit.booking_status)
-                                                    .foregroundStyle(.secondary)
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            
-                                            VStack(alignment: .leading, spacing: 10) {
-                                                Text("Stato Operativo")
-                                                    .font(.headline)
-                                                
-                                                Text("Task: \(unit.cleaning_task)")
-                                                Text("Lingua: \(unit.language)")
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding()
-                                            .background(.regularMaterial)
-                                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                                            
-                                            VStack(alignment: .leading, spacing: 10) {
-                                                Text("Note Prenotazione")
-                                                    .font(.headline)
-                                                
-                                                if unit.beddy_notes.isEmpty {
-                                                    Text("Nessuna nota")
-                                                        .foregroundStyle(.secondary)
-                                                } else {
-                                                    Text(unit.beddy_notes)
-                                                }
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding()
-                                            .background(.regularMaterial)
-                                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                                        }
-                                        .padding()
-                                    }
-                                    .navigationTitle("Dettaglio")
-                                    .navigationBarTitleDisplayMode(.inline)
+                                    UnitDetailView(unit: unit, vm: vm)
                                 } label: {
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text(unit.unit_name)

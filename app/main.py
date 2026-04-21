@@ -1,6 +1,6 @@
 # File: app/main.py
 
-from beddy_reader import build_daily_view, calculate_day_difficulty
+from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
 
 def format_task(value: str) -> str:

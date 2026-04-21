@@ -1,56 +1,63 @@
 {
   "status": "ok",
-  "date": "Martedì 21 Aprile 2026",
+  "date": "22/04/2026",
   "difficulty": "MEDIUM",
   "units": [
     {
-      "unit_name": "CAMERA 1",
-      "booking_status": "Check-in",
-      "cleaning_task": "Da rifare",
+      "unit_name": "camera 1",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
       "language": "IT",
-      "beddy_notes": "Letti separati fattura"
+      "beddy_notes": "Letti singoli",
+      "internal_note": "Test nota"
     },
     {
-      "unit_name": "CAMERA 2",
-      "booking_status": "Check-in",
-      "cleaning_task": "Da rifare",
+      "unit_name": "camera 2",
+      "booking_status": "overnight",
+      "cleaning_task": "rassetto",
       "language": "ENG",
-      "beddy_notes": "Viaggio di nozze"
+      "beddy_notes": "Viaggio di nozze camera per 2",
+      "internal_note": ""
     },
     {
-      "unit_name": "CAMERA 3",
-      "booking_status": "Check-in",
-      "cleaning_task": "Da rifare",
+      "unit_name": "camera 3",
+      "booking_status": "overnight",
+      "cleaning_task": "rassetto",
       "language": "ENG",
-      "beddy_notes": ""
+      "beddy_notes": "",
+      "internal_note": ""
     },
     {
-      "unit_name": "CAMERA 4",
-      "booking_status": "Pernottamento",
-      "cleaning_task": "Rassetto",
-      "language": "ENG",
-      "beddy_notes": "X1"
-    },
-    {
-      "unit_name": "APP 5",
-      "booking_status": "Vuota",
-      "cleaning_task": "Niente",
+      "unit_name": "camera 4",
+      "booking_status": "empty",
+      "cleaning_task": "niente",
       "language": "-",
-      "beddy_notes": ""
+      "beddy_notes": "",
+      "internal_note": ""
     },
     {
-      "unit_name": "APP 6",
-      "booking_status": "Vuota",
-      "cleaning_task": "Niente",
+      "unit_name": "app 5",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "IT",
+      "beddy_notes": "Camera c 2",
+      "internal_note": ""
+    },
+    {
+      "unit_name": "app 6",
+      "booking_status": "empty",
+      "cleaning_task": "niente",
       "language": "-",
-      "beddy_notes": ""
+      "beddy_notes": "",
+      "internal_note": ""
     },
     {
-      "unit_name": "APP 7",
-      "booking_status": "Pernottamento",
-      "cleaning_task": "Niente",
+      "unit_name": "app 7",
+      "booking_status": "overnight",
+      "cleaning_task": "niente",
       "language": "ENG",
-      "beddy_notes": "Cane e culla X2"
+      "beddy_notes": "Cane e culla X2",
+      "internal_note": ""
     }
   ]
 }

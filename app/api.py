@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
+from fastapi import Body
+from app.unit_state import set_note
+
 app = FastAPI(title="Housekeeping Hub API")
 
 
@@ -34,3 +37,13 @@ def daily_view():
         payload = json.load(f)
 
     return payload
+
+
+@app.post("/api/save-note")
+def save_note(payload: dict = Body(...)):
+    unit_name = payload.get("unit_name", "")
+    note = payload.get("note", "")
+
+    set_note(unit_name, note)
+
+    return {"status": "ok"}
