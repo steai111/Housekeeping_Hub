@@ -6,6 +6,8 @@ from app.beddy_reader import build_daily_view, calculate_day_difficulty
 from fastapi import Body
 from app.unit_state import set_note
 
+from app.unit_state import get_note
+
 app = FastAPI(title="Housekeeping Hub API")
 
 
@@ -35,6 +37,9 @@ def daily_view():
 
     with open(file_path, "r", encoding="utf-8") as f:
         payload = json.load(f)
+
+    for unit in payload.get("units", []):
+        unit["internal_note"] = get_note(unit.get("unit_name", ""))
 
     return payload
 
