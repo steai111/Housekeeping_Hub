@@ -35,16 +35,11 @@ struct ContentView: View {
     }
     
     var appearanceMenu: some View {
-        Menu {
-            Button("Sistema") {
-                selectedAppearance = "system"
-            }
-            Button("Chiaro") {
-                selectedAppearance = "light"
-            }
-            Button("Scuro") {
-                selectedAppearance = "dark"
-            }
+        Button {
+            selectedAppearance =
+                selectedAppearance == "dark"
+                ? "light"
+                : "dark"
         } label: {
             Image(systemName: "circle.lefthalf.filled")
         }

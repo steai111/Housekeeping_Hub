@@ -9,25 +9,36 @@ final class DailyViewModel: ObservableObject {
     @Published var units: [DailyUnit] = []
     
     func loadData() async {
+        
         guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/daily") else {
             return
         }
         
         loading = true
+        defer { loading = false }
+        
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 20
         
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP status:", httpResponse.statusCode)
+            }
+            
             let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
             
-            difficulty = decoded.difficulty
             date = decoded.date
+            difficulty = decoded.difficulty
             units = decoded.units
             
+            print("Daily loaded OK:", decoded.units.count, "unità")
+            
         } catch {
-            print("Errore fetch:", error.localizedDescription)
+            print("Errore loadData:", error)
         }
-        
-        loading = false
     }
     
     func saveInternalNote(unitName: String, note: String) async {

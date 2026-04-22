@@ -3,21 +3,52 @@ import SwiftUI
 struct DailyTaskView: View {
     
     @StateObject private var vm = DailyViewModel()
+    @Environment(\.colorScheme) var colorScheme
     
     var daRifareCount: Int {
-        vm.units.filter { $0.cleaning_task == "Da rifare" }.count
+        vm.units.filter { $0.cleaning_task == "da_rifare" }.count
     }
-    
+
     var smontareCount: Int {
-        vm.units.filter { $0.cleaning_task == "Smontare" }.count
+        vm.units.filter { $0.cleaning_task == "smontare" }.count
     }
-    
+
     var rassettoCount: Int {
-        vm.units.filter { $0.cleaning_task == "Rassetto" }.count
+        vm.units.filter { $0.cleaning_task == "rassetto" }.count
+    }
+
+    var nienteCount: Int {
+        vm.units.filter { $0.cleaning_task == "niente" }.count
     }
     
-    var nienteCount: Int {
-        vm.units.filter { $0.cleaning_task == "Niente" }.count
+    func formattedStatus(_ value: String) -> String {
+        switch value {
+        case "check_in":
+            return "Check-in"
+        case "check_out":
+            return "Check-out"
+        case "overnight":
+            return "Pernottamento"
+        case "empty":
+            return "Vuota"
+        default:
+            return value
+        }
+    }
+
+    func formattedTask(_ value: String) -> String {
+        switch value {
+        case "da_rifare":
+            return "Da rifare"
+        case "smontare":
+            return "Smontare"
+        case "rassetto":
+            return "Rassetto"
+        case "niente":
+            return "Niente"
+        default:
+            return value
+        }
     }
     
     var body: some View {
@@ -50,7 +81,11 @@ struct DailyTaskView: View {
                             .clipShape(Capsule())
                     }
                     .padding()
-                    .background(.regularMaterial)
+                    .background(
+                        colorScheme == .dark
+                        ? AnyShapeStyle(.regularMaterial)
+                        : AnyShapeStyle(Color.gray.opacity(0.22))
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     
                     // Summary
@@ -65,7 +100,11 @@ struct DailyTaskView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                    .background(.regularMaterial)
+                    .background(
+                        colorScheme == .dark
+                        ? AnyShapeStyle(.regularMaterial)
+                        : AnyShapeStyle(Color.gray.opacity(0.22))
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     
                     // Units
@@ -79,14 +118,14 @@ struct DailyTaskView: View {
                                     UnitDetailView(unit: unit, vm: vm)
                                 } label: {
                                     VStack(alignment: .leading, spacing: 8) {
-                                        Text(unit.unit_name)
+                                        Text(unit.unit_name.uppercased())
                                             .font(.headline.bold())
                                         
-                                        Text(unit.booking_status)
+                                        Text(formattedStatus(unit.booking_status))
                                             .foregroundStyle(.secondary)
                                         
                                         HStack {
-                                            Text(unit.cleaning_task)
+                                            Text(formattedTask(unit.cleaning_task))
                                             Spacer()
                                             Text(unit.language)
                                                 .bold()
@@ -94,7 +133,11 @@ struct DailyTaskView: View {
                                     }
                                     .padding()
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(.regularMaterial)
+                                    .background(
+                                        colorScheme == .dark
+                                        ? AnyShapeStyle(.regularMaterial)
+                                        : AnyShapeStyle(Color.gray.opacity(0.22))
+                                    )
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                 }
                                 .buttonStyle(.plain)
@@ -104,7 +147,7 @@ struct DailyTaskView: View {
                 }
                 .padding()
             }
-            .navigationTitle("HousekeepingHub")
+            .navigationTitle("Housekeeping Hub")
         }
         .task {
             await vm.loadData()

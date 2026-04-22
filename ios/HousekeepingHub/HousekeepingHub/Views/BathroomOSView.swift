@@ -29,6 +29,7 @@ struct BathroomOSView: View {
     ]
     
     @State private var currentStepIndex: Int = 0
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(spacing: 24) {
@@ -60,13 +61,34 @@ struct BathroomOSView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(.regularMaterial)
+            .background(
+                colorScheme == .dark
+                ? AnyShapeStyle(.regularMaterial)
+                : AnyShapeStyle(Color.gray.opacity(0.22))
+            )
             .clipShape(RoundedRectangle(cornerRadius: 22))
             .padding(.horizontal)
             
             Spacer()
             
             HStack(spacing: 12) {
+                Button {
+                    currentStepIndex = 0
+                } label: {
+                    Text("Reset")
+                        .font(.headline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(width: 100, height: 44)
+                }
+                .background(colorScheme == .dark ? Color.white : Color.black)
+                .foregroundColor(colorScheme == .dark ? .black : .white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.gray.opacity(0.35), lineWidth: 1)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                
                 Button {
                     if currentStepIndex > 0 {
                         currentStepIndex -= 1
@@ -76,13 +98,13 @@ struct BathroomOSView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                        .frame(width: 110, height: 44)
+                        .frame(width: 100, height: 44)
                 }
-                .background(Color.white)
-                .foregroundColor(.black)
+                .background(Color.gray.opacity(0.22))
+                .foregroundColor(Color(uiColor: .label))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.black, lineWidth: 1)
+                        .stroke(Color.gray.opacity(0.35), lineWidth: 1)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
@@ -95,14 +117,13 @@ struct BathroomOSView: View {
                         .font(.headline)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                        .frame(width: 110, height: 44)
+                        .frame(width: 100, height: 44)
                 }
-                .background(Color.black)
-                .foregroundColor(.white)
+                .background(Color.gray.opacity(0.22))
+                .foregroundColor(Color(uiColor: .label))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.white, lineWidth: 1)
-    
+                        .stroke(Color.gray.opacity(0.35), lineWidth: 1)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }

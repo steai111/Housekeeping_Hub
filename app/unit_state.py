@@ -38,3 +38,20 @@ def set_note(unit_name, note):
     data[key]["note"] = note
 
     save_state(data)
+
+def get_completed(unit_name):
+    data = load_state()
+    key = normalize_unit_name(unit_name)
+    return data.get(key, {}).get("completed", False)
+
+
+def set_completed(unit_name, value):
+    data = load_state()
+    key = normalize_unit_name(unit_name)
+
+    if key not in data:
+        data[key] = {}
+
+    data[key]["completed"] = value
+
+    save_state(data)

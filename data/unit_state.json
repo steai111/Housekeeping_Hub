@@ -3,6 +3,7 @@
     "note": "Test nota"
   },
   "camera 1": {
-    "note": "Test nota"
+    "note": "",
+    "completed": true
   }
 }
