@@ -4,9 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
 from fastapi import Body
-from app.unit_state import set_note, set_completed, toggle_completed
-
-from app.unit_state import get_note
+from app.unit_state import set_note, set_completed, toggle_completed, get_note, get_completed
 
 app = FastAPI(title="Housekeeping Hub API")
 
@@ -40,6 +38,7 @@ def daily_view():
 
     for unit in payload.get("units", []):
         unit["internal_note"] = get_note(unit.get("unit_name", ""))
+        unit["completed"] = get_completed(unit.get("unit_name", ""))
 
     return payload
 
