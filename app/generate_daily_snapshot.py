@@ -14,8 +14,8 @@ def generate_snapshot():
     rows = build_daily_view()
     difficulty = calculate_day_difficulty(rows)
     for row in rows:
-    row["internal_note"] = get_note(row["unit_name"])
-    row["completed"] = get_completed(row["unit_name"])
+        row["internal_note"] = get_note(row["unit_name"])
+        row["completed"] = get_completed(row["unit_name"])
 
     target_date = datetime.now() + timedelta(days=1)
 

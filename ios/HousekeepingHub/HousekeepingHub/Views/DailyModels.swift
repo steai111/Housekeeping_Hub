@@ -16,6 +16,7 @@ struct DailyUnit: Codable, Identifiable {
     let language: String
     let beddy_notes: String
     let internal_note: String
+    let completed: Bool
 
     enum CodingKeys: String, CodingKey {
         case unit_name
@@ -24,5 +25,6 @@ struct DailyUnit: Codable, Identifiable {
         case language
         case beddy_notes
         case internal_note
+        case completed
     }
 }

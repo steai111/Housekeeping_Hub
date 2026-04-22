@@ -118,8 +118,14 @@ struct DailyTaskView: View {
                                     UnitDetailView(unit: unit, vm: vm)
                                 } label: {
                                     VStack(alignment: .leading, spacing: 8) {
-                                        Text(unit.unit_name.uppercased())
-                                            .font(.headline.bold())
+                                        HStack(spacing: 8) {
+                                            Circle()
+                                                .fill(unit.completed ? Color.green : Color.gray.opacity(0.5))
+                                                .frame(width: 10, height: 10)
+                                            
+                                            Text(unit.unit_name.uppercased())
+                                                .font(.headline.bold())
+                                        }
                                         
                                         Text(formattedStatus(unit.booking_status))
                                             .foregroundStyle(.secondary)

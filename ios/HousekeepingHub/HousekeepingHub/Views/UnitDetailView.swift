@@ -145,6 +145,21 @@ struct UnitDetailView: View {
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                         }
+                        
+                        Button {
+                            Task {
+                                await vm.completeUnit(unitName: unit.unit_name)
+                                internalNoteText = ""
+                            }
+                        } label: {
+                            Text("Unità completata")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                        }
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
@@ -175,7 +190,8 @@ struct UnitDetailView: View {
             cleaning_task: "da_rifare",
             language: "IT",
             beddy_notes: "Letti singoli",
-            internal_note: "Nota interna test"
+            internal_note: "Nota interna test",
+            completed: false
         ),
         vm: DailyViewModel()
     )

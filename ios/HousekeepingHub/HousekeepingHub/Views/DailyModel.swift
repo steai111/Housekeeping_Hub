@@ -66,4 +66,29 @@ final class DailyViewModel: ObservableObject {
             print("Errore save note")
         }
     }
+    
+    func completeUnit(unitName: String) async {
+        
+        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/complete-unit") else {
+            return
+        }
+        
+        guard let body = try? JSONSerialization.data(withJSONObject: [
+            "unit_name": unitName
+        ]) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = body
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            _ = try await URLSession.shared.data(for: request)
+            await loadData()
+        } catch {
+            print("Errore complete unit")
+        }
+    }
 }
