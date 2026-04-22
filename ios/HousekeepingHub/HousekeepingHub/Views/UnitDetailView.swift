@@ -155,7 +155,9 @@ struct UnitDetailView: View {
                         Button {
                             Task {
                                 await vm.completeUnit(unitName: unit.unit_name)
-                                internalNoteText = ""
+                                if unit.completed == false {
+                                    internalNoteText = ""
+                                }
                             }
                         } label: {
                             ZStack {
@@ -166,7 +168,7 @@ struct UnitDetailView: View {
                                             .stroke(Color.gray.opacity(0.35), lineWidth: 1)
                                     )
 
-                                Text("Unità completata")
+                                Text(unit.completed ? "Segnata come completata" : "Unità completata")
                                     .font(.headline)
                                     .foregroundColor(.black)
                             }

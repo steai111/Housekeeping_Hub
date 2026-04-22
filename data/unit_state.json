@@ -1,9 +1,6 @@
 {
-  "CAMERA 1": {
-    "note": "Test nota"
-  },
   "camera 1": {
     "note": "",
-    "completed": true
+    "completed": false
   }
 }

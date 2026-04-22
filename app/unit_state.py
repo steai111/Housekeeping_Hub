@@ -6,7 +6,7 @@ STATE_FILE = Path("data/unit_state.json")
 
 
 def normalize_unit_name(unit_name):
-    return (unit_name or "").strip().lower()
+    return unit_name.strip().lower()
 
 
 def load_state():
