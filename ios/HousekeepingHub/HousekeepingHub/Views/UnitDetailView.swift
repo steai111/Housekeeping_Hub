@@ -47,9 +47,15 @@ struct UnitDetailView: View {
                 VStack(spacing: 16) {
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(unit.unit_name.uppercased())
-                            .font(.largeTitle.bold())
-                        
+                        HStack(spacing: 12) {
+                            Text(unit.unit_name.uppercased())
+                                .font(.largeTitle.bold())
+
+                            Circle()
+                                .fill(unit.completed ? Color.green : Color.gray.opacity(0.5))
+                                .frame(width: 22, height: 22)
+                        }
+
                         Text(formattedStatus(unit.booking_status))
                             .foregroundStyle(.secondary)
                     }
@@ -152,14 +158,22 @@ struct UnitDetailView: View {
                                 internalNoteText = ""
                             }
                         } label: {
-                            Text("Unità completata")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 52)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.gray.opacity(0.35), lineWidth: 1)
+                                    )
+
+                                Text("Unità completata")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 52)
                         }
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .buttonStyle(.plain)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()

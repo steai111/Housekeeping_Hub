@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
 from fastapi import Body
-from app.unit_state import set_note, set_completed
+from app.unit_state import set_note, set_completed, toggle_completed
 
 from app.unit_state import get_note
 
@@ -57,7 +57,9 @@ def save_note(payload: dict = Body(...)):
 def complete_unit(payload: dict = Body(...)):
     unit_name = payload.get("unit_name", "")
 
-    set_completed(unit_name, True)
-    set_note(unit_name, "")
+    new_value = toggle_completed(unit_name)
 
-    return {"status": "ok"}
+    return {
+        "status": "ok",
+        "completed": new_value
+    }

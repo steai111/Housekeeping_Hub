@@ -55,3 +55,22 @@ def set_completed(unit_name, value):
     data[key]["completed"] = value
 
     save_state(data)
+
+def toggle_completed(unit_name):
+    data = load_state()
+    key = normalize_unit_name(unit_name)
+
+    if key not in data:
+        data[key] = {}
+
+    current_value = data[key].get("completed", False)
+    new_value = not current_value
+
+    data[key]["completed"] = new_value
+
+    if new_value is True:
+        data[key]["note"] = ""
+
+    save_state(data)
+
+    return new_value

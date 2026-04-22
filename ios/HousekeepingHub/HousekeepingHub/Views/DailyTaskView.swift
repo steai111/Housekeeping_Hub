@@ -119,12 +119,12 @@ struct DailyTaskView: View {
                                 } label: {
                                     VStack(alignment: .leading, spacing: 8) {
                                         HStack(spacing: 8) {
+                                            Text(unit.unit_name.uppercased())
+                                                .font(.headline.bold())
+                                            
                                             Circle()
                                                 .fill(unit.completed ? Color.green : Color.gray.opacity(0.5))
                                                 .frame(width: 10, height: 10)
-                                            
-                                            Text(unit.unit_name.uppercased())
-                                                .font(.headline.bold())
                                         }
                                         
                                         Text(formattedStatus(unit.booking_status))
