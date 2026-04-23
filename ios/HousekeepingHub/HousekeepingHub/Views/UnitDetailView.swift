@@ -41,6 +41,10 @@ struct UnitDetailView: View {
         }
     }
     
+    var liveUnit: DailyUnit {
+        vm.units.first(where: { $0.unit_name == unit.unit_name }) ?? unit
+    }
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -52,7 +56,7 @@ struct UnitDetailView: View {
                                 .font(.largeTitle.bold())
 
                             Circle()
-                                .fill(unit.completed ? Color.green : Color.gray.opacity(0.5))
+                                .fill(liveUnit.completed ? Color.green : Color.gray.opacity(0.5))
                                 .frame(width: 22, height: 22)
                         }
 
@@ -155,7 +159,7 @@ struct UnitDetailView: View {
                         Button {
                             Task {
                                 await vm.completeUnit(unitName: unit.unit_name)
-                                if unit.completed == false {
+                                if liveUnit.completed == false {
                                     internalNoteText = ""
                                 }
                             }
@@ -168,7 +172,7 @@ struct UnitDetailView: View {
                                             .stroke(Color.gray.opacity(0.35), lineWidth: 1)
                                     )
 
-                                Text(unit.completed ? "Segnata come completata" : "Unità completata")
+                                Text(liveUnit.completed ? "Segnata come completata" : "Unità completata")
                                     .font(.headline)
                                     .foregroundColor(.black)
                             }

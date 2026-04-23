@@ -4,6 +4,7 @@ struct DailyTaskView: View {
     
     @StateObject private var vm = DailyViewModel()
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.scenePhase) private var scenePhase
     
     var daRifareCount: Int {
         vm.units.filter { $0.cleaning_task == "da_rifare" }.count
@@ -153,10 +154,20 @@ struct DailyTaskView: View {
                 }
                 .padding()
             }
+            .refreshable {
+                await vm.loadData()
+            }
             .navigationTitle("Housekeeping Hub")
         }
         .task {
             await vm.loadData()
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                Task {
+                    await vm.loadData()
+                }
+            }
         }
     }
 }
