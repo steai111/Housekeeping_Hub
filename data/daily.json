@@ -1,7 +1,7 @@
 {
   "status": "ok",
-  "date": "23/04/2026",
-  "difficulty": "MEDIUM",
+  "date": "24/04/2026",
+  "difficulty": "LIGHT",
   "units": [
     {
       "unit_name": "camera 1",
@@ -14,9 +14,9 @@
     },
     {
       "unit_name": "camera 2",
-      "booking_status": "check_in",
-      "cleaning_task": "da_rifare",
-      "language": "ENG",
+      "booking_status": "empty",
+      "cleaning_task": "niente",
+      "language": "-",
       "beddy_notes": "",
       "internal_note": "",
       "completed": false
@@ -35,7 +35,7 @@
       "booking_status": "check_in",
       "cleaning_task": "da_rifare",
       "language": "IT",
-      "beddy_notes": "",
+      "beddy_notes": "Arrivo la mattina",
       "internal_note": "",
       "completed": false
     },
@@ -59,8 +59,8 @@
     },
     {
       "unit_name": "app 7",
-      "booking_status": "check_in",
-      "cleaning_task": "da_rifare",
+      "booking_status": "overnight",
+      "cleaning_task": "niente",
       "language": "IT",
       "beddy_notes": "",
       "internal_note": "",
