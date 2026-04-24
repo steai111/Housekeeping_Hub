@@ -2,5 +2,8 @@
   "camera 1": {
     "note": "",
     "completed": false
+  },
+  "app 5": {
+    "is_room_override": true
   }
 }

@@ -45,6 +45,18 @@ struct UnitDetailView: View {
         vm.units.first(where: { $0.unit_name == unit.unit_name }) ?? unit
     }
     
+    func unitStatusColor(_ unit: DailyUnit) -> Color {
+        if unit.completed {
+            return Color.green
+        }
+        
+        if unit.cleaning_task != "niente" {
+            return Color.yellow
+        }
+        
+        return Color.gray.opacity(0.5)
+    }
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -56,7 +68,7 @@ struct UnitDetailView: View {
                                 .font(.largeTitle.bold())
 
                             Circle()
-                                .fill(liveUnit.completed ? Color.green : Color.gray.opacity(0.5))
+                                .fill(unitStatusColor(liveUnit))
                                 .frame(width: 22, height: 22)
                         }
 
@@ -108,8 +120,23 @@ struct UnitDetailView: View {
                         TextField("", text: $internalNoteText, axis: .vertical)
                             .focused($noteFieldFocused)
                             .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.25)) {
-                                    proxy.scrollTo("internalNotesBlock", anchor: .center)
+                                Task {
+                                    try? await Task.sleep(nanoseconds: 300_000_000)
+                                    
+                                    withAnimation(.easeInOut(duration: 0.25)) {
+                                        proxy.scrollTo("internalNotesBlock", anchor: .top)
+                                    }
+                                }
+                            }
+                            .onChange(of: noteFieldFocused) { focused in
+                                if focused {
+                                    Task {
+                                        try? await Task.sleep(nanoseconds: 300_000_000)
+                                        
+                                        withAnimation(.easeInOut(duration: 0.25)) {
+                                            proxy.scrollTo("internalNotesBlock", anchor: .top)
+                                        }
+                                    }
                                 }
                             }
                             .textFieldStyle(.plain)
@@ -190,6 +217,12 @@ struct UnitDetailView: View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .id("internalNotesBlock")
+                    
+                    if noteFieldFocused {
+                        Spacer()
+                            .frame(height: 260)
+                            .id("keyboardSpacer")
+                    }
                 }
                 .padding()
             }
@@ -211,7 +244,8 @@ struct UnitDetailView: View {
             language: "IT",
             beddy_notes: "Letti singoli",
             internal_note: "Nota interna test",
-            completed: false
+            completed: false,
+            is_room_override: false
         ),
         vm: DailyViewModel()
     )

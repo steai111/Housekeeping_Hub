@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
 from fastapi import Body
-from app.unit_state import set_note, set_completed, toggle_completed, get_note, get_completed
+from app.unit_state import set_note, set_completed, toggle_completed, get_note, get_completed, toggle_room_override, get_is_room_override
 
 app = FastAPI(title="Housekeeping Hub API")
 
@@ -39,6 +39,7 @@ def daily_view():
     for unit in payload.get("units", []):
         unit["internal_note"] = get_note(unit.get("unit_name", ""))
         unit["completed"] = get_completed(unit.get("unit_name", ""))
+        unit["is_room_override"] = get_is_room_override(unit.get("unit_name", ""))
 
     return payload
 
@@ -61,4 +62,15 @@ def complete_unit(payload: dict = Body(...)):
     return {
         "status": "ok",
         "completed": new_value
+    }
+
+@app.post("/api/toggle-room-override")
+def toggle_room_override_endpoint(payload: dict = Body(...)):
+    unit_name = payload.get("unit_name", "")
+
+    new_value = toggle_room_override(unit_name)
+
+    return {
+        "status": "ok",
+        "is_room_override": new_value
     }

@@ -74,3 +74,25 @@ def toggle_completed(unit_name):
     save_state(data)
 
     return new_value
+
+def get_is_room_override(unit_name):
+    data = load_state()
+    key = normalize_unit_name(unit_name)
+    return data.get(key, {}).get("is_room_override", False)
+
+
+def toggle_room_override(unit_name):
+    data = load_state()
+    key = normalize_unit_name(unit_name)
+
+    if key not in data:
+        data[key] = {}
+
+    current_value = data[key].get("is_room_override", False)
+    new_value = not current_value
+
+    data[key]["is_room_override"] = new_value
+
+    save_state(data)
+
+    return new_value

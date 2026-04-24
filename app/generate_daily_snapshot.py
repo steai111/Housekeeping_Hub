@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
 
-from app.unit_state import get_note, get_completed
+from app.unit_state import get_note, get_completed, get_is_room_override
 
 
 OUTPUT_FILE = Path("data/daily.json")
@@ -16,6 +16,7 @@ def generate_snapshot():
     for row in rows:
         row["internal_note"] = get_note(row["unit_name"])
         row["completed"] = get_completed(row["unit_name"])
+        row["is_room_override"] = get_is_room_override(row["unit_name"])
 
     target_date = datetime.now() + timedelta(days=1)
 

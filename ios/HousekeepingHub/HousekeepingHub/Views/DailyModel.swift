@@ -91,4 +91,29 @@ final class DailyViewModel: ObservableObject {
             print("Errore complete unit")
         }
     }
+    
+    func toggleRoomOverride(unitName: String) async {
+        
+        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/toggle-room-override") else {
+            return
+        }
+        
+        guard let body = try? JSONSerialization.data(withJSONObject: [
+            "unit_name": unitName
+        ]) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = body
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            _ = try await URLSession.shared.data(for: request)
+            await loadData()
+        } catch {
+            print("Errore toggle room override")
+        }
+    }
 }
