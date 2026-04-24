@@ -1,23 +1,23 @@
 {
   "status": "ok",
-  "date": "24/04/2026",
-  "difficulty": "LIGHT",
+  "date": "25/04/2026",
+  "difficulty": "HEAVY",
   "units": [
     {
       "unit_name": "camera 1",
-      "booking_status": "empty",
-      "cleaning_task": "niente",
-      "language": "-",
-      "beddy_notes": "",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "IT",
+      "beddy_notes": "Cane",
       "internal_note": "",
-      "completed": true
+      "completed": false
     },
     {
       "unit_name": "camera 2",
-      "booking_status": "empty",
-      "cleaning_task": "niente",
-      "language": "-",
-      "beddy_notes": "",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "IT",
+      "beddy_notes": "Arrivo 12",
       "internal_note": "",
       "completed": false
     },
@@ -32,8 +32,8 @@
     },
     {
       "unit_name": "camera 4",
-      "booking_status": "check_in",
-      "cleaning_task": "da_rifare",
+      "booking_status": "overnight",
+      "cleaning_task": "rassetto",
       "language": "IT",
       "beddy_notes": "Arrivo la mattina",
       "internal_note": "",
@@ -41,19 +41,19 @@
     },
     {
       "unit_name": "app 5",
-      "booking_status": "overnight",
-      "cleaning_task": "niente",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
       "language": "IT",
-      "beddy_notes": "Camera c 2",
+      "beddy_notes": "",
       "internal_note": "",
       "completed": false
     },
     {
       "unit_name": "app 6",
-      "booking_status": "empty",
-      "cleaning_task": "niente",
-      "language": "-",
-      "beddy_notes": "",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "ENG",
+      "beddy_notes": "Colazione primo g offerta",
       "internal_note": "",
       "completed": false
     },

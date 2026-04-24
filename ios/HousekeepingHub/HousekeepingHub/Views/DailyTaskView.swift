@@ -52,6 +52,19 @@ struct DailyTaskView: View {
         }
     }
     
+    func difficultyColor(_ value: String) -> Color {
+        switch value.uppercased() {
+        case "LIGHT":
+            return Color.blue.opacity(0.22)
+        case "MEDIUM":
+            return Color.brown.opacity(0.28)
+        case "HARD", "HEAVY":
+            return Color.red.opacity(0.25)
+        default:
+            return Color.gray.opacity(0.22)
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -78,7 +91,7 @@ struct DailyTaskView: View {
                             .font(.headline.bold())
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
-                            .background(.orange.opacity(0.18))
+                            .background(difficultyColor(vm.difficulty))
                             .clipShape(Capsule())
                     }
                     .padding()
