@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 from typing import Dict, List
 
-from app.beddy_tableau_reader import read_target_day_bookings
+from app.beddy_tableau_reader import read_day_bookings
 
 
 UNITS = [
@@ -77,50 +77,74 @@ def build_daily_view() -> List[dict]:
         for unit in UNITS
     }
 
-    bookings = read_target_day_bookings()
+    today_bookings = read_day_bookings(0)
+    tomorrow_bookings = read_day_bookings(1)
+
+    today_map = {}
+    tomorrow_map = {}
+
+    for booking in today_bookings:
+        unit_name = normalize_unit_name(
+            raw=booking.get("accommodation_type", ""),
+            room_number=booking.get("room_number", ""),
+        )
+        today_map[unit_name] = booking
+
+    for booking in tomorrow_bookings:
+        unit_name = normalize_unit_name(
+            raw=booking.get("accommodation_type", ""),
+            room_number=booking.get("room_number", ""),
+        )
+        tomorrow_map[unit_name] = booking
 
     target_date = datetime.now() + timedelta(days=1)
     target_str = target_date.strftime("%d %b %Y").upper()
 
-    for booking in bookings:
-        raw_unit = booking.get("accommodation_type", "")
+    for unit_name in UNITS:
+        today_booking = today_map.get(unit_name)
+        tomorrow_booking = tomorrow_map.get(unit_name)
 
-        unit_name = normalize_unit_name(
-            raw=raw_unit,
-            room_number=booking.get("room_number", ""),
-        )
-
-        if unit_name not in rows:
+        if not today_booking and not tomorrow_booking:
             continue
 
-        checkin = booking.get("checkin_date", "").strip().upper()
-        checkout = booking.get("checkout_date", "").strip().upper()
+        source = tomorrow_booking or today_booking
 
-        if checkin == target_str:
+        language = detect_language(source.get("country_raw", ""))
+        notes = source.get("beddy_notes", "")
+
+        if not today_booking and tomorrow_booking:
             booking_status = "check_in"
             cleaning_task = "da_rifare"
 
-        elif checkout == target_str:
+        elif today_booking and not tomorrow_booking:
             booking_status = "check_out"
             cleaning_task = "smontare"
 
         else:
-            booking_status = "overnight"
+            today_id = today_booking.get("booking_id", "")
+            tomorrow_id = tomorrow_booking.get("booking_id", "")
 
-            if unit_name in ["app 5", "app 6", "app 7"]:
-                cleaning_task = "niente"
+            if today_id == tomorrow_id:
+                booking_status = "overnight"
+
+                if unit_name == "app 7":
+                    cleaning_task = "niente"
+                elif unit_name in ["app 5", "app 6"]:
+                    cleaning_task = "niente"
+                else:
+                    cleaning_task = "rassetto"
+
             else:
-                cleaning_task = "rassetto"
+                booking_status = "check_in"
+                cleaning_task = "da_rifare"
 
         rows[unit_name] = {
             "unit_name": unit_name,
             "booking_status": booking_status,
             "cleaning_task": cleaning_task,
-            "language": detect_language(booking.get("country_raw", "")),
-            "beddy_notes": booking.get("beddy_notes", ""),
+            "language": language,
+            "beddy_notes": notes,
         }
-
-    return list(rows.values())
 
 
 def calculate_day_difficulty(rows: List[dict]) -> str:

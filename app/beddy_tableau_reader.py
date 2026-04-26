@@ -14,8 +14,8 @@ from app.beddy_detail_extractor import extract_booking_detail
 TABLEAU_URL_BASE = "https://app.beddy.io/tableau"
 
 
-def _build_target_context() -> dict:
-    target_dt = datetime.now() + timedelta(days=1)
+def _build_target_context(offset_days: int = 1) -> dict:
+    target_dt = datetime.now() + timedelta(days=offset_days)
 
     return {
         "target_date_iso": target_dt.strftime("%Y-%m-%d"),
@@ -67,8 +67,8 @@ def _build_raw_booking(extracted: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def read_target_day_bookings() -> List[Dict[str, Any]]:
-    context = _build_target_context()
+def read_day_bookings(offset_days: int = 1) -> List[Dict[str, Any]]:
+    context = _build_target_context(offset_days)
 
     target_date_iso = context["target_date_iso"]
     target_day = context["target_day"]
@@ -207,7 +207,7 @@ def read_target_day_bookings() -> List[Dict[str, Any]]:
 
 
 if __name__ == "__main__":
-    bookings = read_target_day_bookings()
+    bookings = read_day_bookings(1)
     print("\nBOOKINGS FINALI:")
     for booking in bookings:
         print(booking)

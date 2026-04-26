@@ -8,10 +8,43 @@ final class DailyViewModel: ObservableObject {
     @Published var difficulty = "-"
     @Published var units: [DailyUnit] = []
     
+    private let cacheKey = "cachedDailyResponse"
+
+    func loadCachedData() {
+        guard let data = UserDefaults.standard.data(forKey: cacheKey) else {
+            return
+        }
+        
+        do {
+            let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
+            date = decoded.date
+            difficulty = decoded.difficulty
+            units = decoded.units
+            
+            print("Daily cache loaded OK:", decoded.units.count, "unità")
+        } catch {
+            print("Errore load cache:", error)
+        }
+    }
+
+    func saveCache(_ response: DailyResponse) {
+        do {
+            let data = try JSONEncoder().encode(response)
+            UserDefaults.standard.set(data, forKey: cacheKey)
+            print("Daily cache saved OK")
+        } catch {
+            print("Errore save cache:", error)
+        }
+    }
+    
     func loadData() async {
         
         guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/daily") else {
             return
+        }
+        
+        if units.isEmpty {
+            loadCachedData()
         }
         
         loading = true
@@ -19,7 +52,7 @@ final class DailyViewModel: ObservableObject {
         
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.timeoutInterval = 20
+        request.timeoutInterval = 60
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -29,6 +62,7 @@ final class DailyViewModel: ObservableObject {
             }
             
             let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
+            saveCache(decoded)
             
             date = decoded.date
             difficulty = decoded.difficulty
