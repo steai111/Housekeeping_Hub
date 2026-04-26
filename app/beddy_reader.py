@@ -146,6 +146,8 @@ def build_daily_view() -> List[dict]:
             "beddy_notes": notes,
         }
 
+    return list(rows.values())
+
 
 def calculate_day_difficulty(rows: List[dict]) -> str:
     score = 0
