@@ -128,6 +128,42 @@ final class DailyViewModel: ObservableObject {
     
     func toggleRoomOverride(unitName: String) async {
         
+        guard let index = units.firstIndex(where: { $0.unit_name == unitName }) else {
+            return
+        }
+        
+        let oldUnit = units[index]
+        let newOverride = !oldUnit.is_room_override
+        
+        let newCleaningTask: String
+        if oldUnit.booking_status == "overnight" {
+            newCleaningTask = newOverride ? "rassetto" : "niente"
+        } else {
+            newCleaningTask = oldUnit.cleaning_task
+        }
+        
+        let updatedUnit = DailyUnit(
+            unit_name: oldUnit.unit_name,
+            booking_status: oldUnit.booking_status,
+            cleaning_task: newCleaningTask,
+            language: oldUnit.language,
+            beddy_notes: oldUnit.beddy_notes,
+            internal_note: oldUnit.internal_note,
+            completed: oldUnit.completed,
+            is_room_override: newOverride
+        )
+        
+        units[index] = updatedUnit
+        
+        let response = DailyResponse(
+            status: "ok",
+            date: date,
+            difficulty: difficulty,
+            units: units
+        )
+        
+        saveCache(response)
+        
         guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/toggle-room-override") else {
             return
         }
@@ -145,7 +181,6 @@ final class DailyViewModel: ObservableObject {
         
         do {
             _ = try await URLSession.shared.data(for: request)
-            await loadData()
         } catch {
             print("Errore toggle room override")
         }

@@ -1,51 +1,47 @@
 # File: app/main.py
 
+import json
+from pathlib import Path
+from datetime import datetime, timedelta
+
 from app.beddy_reader import build_daily_view, calculate_day_difficulty
+from app.unit_state import get_note, get_completed, get_is_room_override
 
 
-def format_task(value: str) -> str:
-    mapping = {
-        "da_rifare": "Da rifare",
-        "smontare": "Smontare",
-        "rassetto": "Rassetto",
-        "niente": "Niente",
-    }
-    return mapping.get(value, value)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+OUTPUT_FILE = PROJECT_ROOT / "data" / "daily.json"
 
 
-def format_booking_status(value: str) -> str:
-    mapping = {
-        "check_in": "Check-in",
-        "check_out": "Check-out",
-        "overnight": "Pernottamento",
-        "empty": "Vuota",
-    }
-    return mapping.get(value, value)
-
-
-def print_dashboard(rows: list[dict], difficulty: str) -> None:
-    print("\n==============================")
-    print(" HOUSEKEEPING HUB - DAILY VIEW")
-    print("==============================")
-    print(f"Giornata: {difficulty}")
-    print()
+def generate_snapshot() -> dict:
+    rows = build_daily_view()
+    difficulty = calculate_day_difficulty(rows)
 
     for row in rows:
-        print(f"• {row['unit_name'].upper()}")
-        print(f"  Status: {format_booking_status(row['booking_status'])}")
-        print(f"  Task: {format_task(row['cleaning_task'])}")
-        print(f"  Lingua: {row['language']}")
+        row["internal_note"] = get_note(row["unit_name"])
+        row["completed"] = get_completed(row["unit_name"])
+        row["is_room_override"] = get_is_room_override(row["unit_name"])
 
-        if row["beddy_notes"]:
-            print(f"  Note: {row['beddy_notes']}")
+    target_date = datetime.now() + timedelta(days=1)
 
-        print()
+    payload = {
+        "status": "ok",
+        "date": target_date.strftime("%d/%m/%Y"),
+        "difficulty": difficulty,
+        "units": rows,
+    }
+
+    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+
+    print(f"daily.json aggiornato correttamente: {OUTPUT_FILE}")
+
+    return payload
 
 
 def main() -> None:
-    rows = build_daily_view()
-    difficulty = calculate_day_difficulty(rows)
-    print_dashboard(rows, difficulty)
+    generate_snapshot()
 
 
 if __name__ == "__main__":

@@ -199,7 +199,7 @@ struct UnitDetailView: View {
                                             .stroke(Color.gray.opacity(0.35), lineWidth: 1)
                                     )
 
-                                Text(liveUnit.completed ? "Segnata come completata" : "Unità completata")
+                                Text(liveUnit.completed ? "Segna come non completata" : "Unità completata")
                                     .font(.headline)
                                     .foregroundColor(.black)
                             }

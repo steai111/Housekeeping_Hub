@@ -174,6 +174,8 @@ def read_day_bookings(offset_days: int = 1) -> List[Dict[str, Any]]:
 #                continue
 
             booking_id = extracted.get("booking_id", "").strip()
+            guest_name = extracted.get("guest_name", "").strip().upper()
+            room_number = extracted.get("room_number", "").strip()
 
             if not booking_id:
                 print("SALTATO: booking_id vuoto")
@@ -182,12 +184,16 @@ def read_day_bookings(offset_days: int = 1) -> List[Dict[str, Any]]:
                 _close_tableau_popup(page)
                 continue
 
-            if booking_id in booking_ids_seen:
-                print(f"DUPLICATO SALTATO: {booking_id}")
+            dedupe_key = f"{booking_id}|{guest_name}|{room_number}"
+
+            if dedupe_key in booking_ids_seen:
+                print(f"DUPLICATO SALTATO: {dedupe_key}")
                 detail_page.close()
                 page.wait_for_timeout(700)
                 _close_tableau_popup(page)
                 continue
+
+            booking_ids_seen.add(dedupe_key)
 
             booking_ids_seen.add(booking_id)
 
