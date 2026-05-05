@@ -38,92 +38,78 @@ final class DailyViewModel: ObservableObject {
     }
     
     func loadData() async {
-        
-        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/daily") else {
-            return
-        }
-        
-        if units.isEmpty {
-            loadCachedData()
-        }
-        
-        loading = true
-        defer { loading = false }
-        
-        var request = URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        request.timeoutInterval = 60
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("HTTP status:", httpResponse.statusCode)
-            }
-            
-            let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
-            saveCache(decoded)
-            
-            date = decoded.date
-            difficulty = decoded.difficulty
-            units = decoded.units
-            
-            print("Daily loaded OK:", decoded.units.count, "unità")
-            
-        } catch {
-            print("Errore loadData:", error)
-        }
+        print("loadData DISABILITATO — uso solo cache locale")
     }
     
     func saveInternalNote(unitName: String, note: String) async {
         
-        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/save-note") else {
+        guard let index = units.firstIndex(where: { $0.unit_name == unitName }) else {
             return
         }
         
-        guard let body = try? JSONSerialization.data(withJSONObject: [
-            "unit_name": unitName,
-            "note": note
-        ]) else {
-            return
-        }
+        let oldUnit = units[index]
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = body
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let updatedUnit = DailyUnit(
+            unit_name: oldUnit.unit_name,
+            booking_status: oldUnit.booking_status,
+            cleaning_task: oldUnit.cleaning_task,
+            language: oldUnit.language,
+            beddy_notes: oldUnit.beddy_notes,
+            internal_note: note,
+            completed: oldUnit.completed,
+            is_room_override: oldUnit.is_room_override
+        )
         
-        do {
-            _ = try await URLSession.shared.data(for: request)
-            await loadData()
-        } catch {
-            print("Errore save note")
-        }
+        units[index] = updatedUnit
+        
+        print("Nota salvata localmente:", unitName)
+        
+        let response = DailyResponse(
+            status: "ok",
+            date: date,
+            difficulty: difficulty,
+            units: units
+        )
+        
+        saveCache(response)
     }
     
     func completeUnit(unitName: String) async {
         
-        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/complete-unit") else {
+        guard let index = units.firstIndex(where: { $0.unit_name == unitName }) else {
             return
         }
         
-        guard let body = try? JSONSerialization.data(withJSONObject: [
-            "unit_name": unitName
-        ]) else {
-            return
+        let oldUnit = units[index]
+        let newCompleted = !oldUnit.completed
+        
+        let updatedUnit = DailyUnit(
+            unit_name: oldUnit.unit_name,
+            booking_status: oldUnit.booking_status,
+            cleaning_task: oldUnit.cleaning_task,
+            language: oldUnit.language,
+            beddy_notes: oldUnit.beddy_notes,
+            internal_note: newCompleted ? "" : oldUnit.internal_note,
+            completed: newCompleted,
+            is_room_override: oldUnit.is_room_override
+        )
+        
+        units[index] = updatedUnit
+        
+        if newCompleted {
+            print("Unità completata localmente:", unitName)
+        } else {
+            print("Unità riaperta localmente:", unitName)
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = body
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let response = DailyResponse(
+            status: "ok",
+            date: date,
+            difficulty: difficulty,
+            units: units
+        )
         
-        do {
-            _ = try await URLSession.shared.data(for: request)
-            await loadData()
-        } catch {
-            print("Errore complete unit")
-        }
+        saveCache(response)
     }
     
     func toggleRoomOverride(unitName: String) async {

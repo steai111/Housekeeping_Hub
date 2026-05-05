@@ -290,13 +290,12 @@ struct DailyTaskView: View {
                 .padding()
             }
             .refreshable {
-                await vm.loadData()
+                vm.loadCachedData()
             }
             .navigationTitle("Housekeeping Hub")
         }
         .task {
             vm.loadCachedData()
-            await vm.loadData()
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
