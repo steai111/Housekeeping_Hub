@@ -296,6 +296,7 @@ struct DailyTaskView: View {
         }
         .task {
             vm.loadCachedData()
+            await vm.loadData()
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {

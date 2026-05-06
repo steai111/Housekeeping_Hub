@@ -38,7 +38,38 @@ final class DailyViewModel: ObservableObject {
     }
     
     func loadData() async {
-        print("loadData DISABILITATO — uso solo cache locale")
+        
+        guard let url = URL(string: "https://housekeeping-hub.onrender.com/api/daily") else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 60
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP status:", httpResponse.statusCode)
+            }
+            
+            let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
+            
+            if decoded.date != date {
+                saveCache(decoded)
+                date = decoded.date
+                difficulty = decoded.difficulty
+                units = decoded.units
+                
+                print("Nuovo snapshot giornaliero caricato:", decoded.date)
+            } else {
+                print("Snapshot già aggiornato:", decoded.date)
+            }
+            
+        } catch {
+            print("Errore check snapshot remoto:", error)
+        }
     }
     
     func saveInternalNote(unitName: String, note: String) async {
