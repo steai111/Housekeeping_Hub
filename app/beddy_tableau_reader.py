@@ -77,6 +77,13 @@ def read_day_bookings(offset_days: int = 1) -> List[Dict[str, Any]]:
     tableau_url = _build_tableau_url(target_date_iso)
 
     page: Page = open_beddy_session(tableau_url, headless=False)
+
+    if not page.url.startswith(tableau_url):
+        print(f"Pagina non sul tableau target. Forzo navigazione a: {tableau_url}")
+        page.goto(tableau_url)
+        page.wait_for_load_state("networkidle")
+        page.wait_for_timeout(1500)
+
     collected_bookings: List[Dict[str, Any]] = []
     booking_ids_seen: set[str] = set()
 

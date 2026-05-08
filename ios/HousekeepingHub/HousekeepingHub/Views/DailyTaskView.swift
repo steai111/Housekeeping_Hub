@@ -300,7 +300,10 @@ struct DailyTaskView: View {
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                vm.loadCachedData()
+                Task {
+                    vm.loadCachedData()
+                    await vm.loadData()
+                }
             }
         }
     }

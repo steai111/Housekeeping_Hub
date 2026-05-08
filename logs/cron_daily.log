@@ -726,3 +726,21 @@ BOX TARGET: ROUYER MATHIEU (index=56)
 BOOKING RACCOLTA: {'booking_id': '8370084', 'guest_name': 'Mathieu Rouyer', 'accommodation_type': 'Appartamento Cipresso', 'room_number': '7', 'checkin_date': '08 MAG 2026', 'checkout_date': '10 MAG 2026', 'country_raw': 'FRANCIA', 'booking_status_raw': 'Confermata', 'beddy_notes': 'Culla'}
 daily.json aggiornato correttamente: /Users/ste111/AI_SYSTEMS/San_Felicissimo/Housekeeping_Hub/data/daily.json
 === GIT PUSH START ===
+[main ffd3048] auto daily snapshot 2026-05-08 15:02:05
+ Committer: Ste <ste111@Macmini.station>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 5 files changed, 186 insertions(+), 12 deletions(-)
+To github.com:steai111/Housekeeping_Hub.git
+   439221a..ffd3048  main -> main
+=== DONE ===
