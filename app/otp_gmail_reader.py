@@ -95,7 +95,7 @@ def _extract_otp_code(text: str) -> str:
 def _open_mailbox() -> imaplib.IMAP4_SSL:
     mail = imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT)
     mail.login(_gmail_address(), _gmail_app_password())
-    mail.select("inbox")
+    mail.select('"[Gmail]/Tutti i messaggi"')
     return mail
 
 
