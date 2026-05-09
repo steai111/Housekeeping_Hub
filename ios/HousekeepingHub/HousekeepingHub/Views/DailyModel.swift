@@ -48,27 +48,41 @@ final class DailyViewModel: ObservableObject {
         request.timeoutInterval = 60
         
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                print("HTTP status:", httpResponse.statusCode)
-            }
-            
+            let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
             
-            if decoded.date != date {
-                saveCache(decoded)
-                date = decoded.date
-                difficulty = decoded.difficulty
-                units = decoded.units
+            let mergedUnits = decoded.units.map { remoteUnit in
+                let localUnit = units.first { $0.unit_name == remoteUnit.unit_name }
                 
-                print("Nuovo snapshot giornaliero caricato:", decoded.date)
-            } else {
-                print("Snapshot già aggiornato:", decoded.date)
+                return DailyUnit(
+                    unit_name: remoteUnit.unit_name,
+                    booking_status: remoteUnit.booking_status,
+                    cleaning_task: remoteUnit.cleaning_task,
+                    language: remoteUnit.language,
+                    beddy_notes: remoteUnit.beddy_notes,
+                    internal_note: localUnit?.internal_note ?? remoteUnit.internal_note,
+                    completed: localUnit?.completed ?? remoteUnit.completed,
+                    is_room_override: localUnit?.is_room_override ?? remoteUnit.is_room_override
+                )
             }
             
+            let mergedResponse = DailyResponse(
+                status: decoded.status,
+                date: decoded.date,
+                difficulty: decoded.difficulty,
+                units: mergedUnits
+            )
+            
+            date = mergedResponse.date
+            difficulty = mergedResponse.difficulty
+            units = mergedResponse.units
+            
+            saveCache(mergedResponse)
+            
+            print("Snapshot remoto sincronizzato:", decoded.date)
+            
         } catch {
-            print("Errore check snapshot remoto:", error)
+            print("Errore sync snapshot remoto:", error)
         }
     }
     
