@@ -185,6 +185,33 @@ struct UnitDetailView: View {
                         
                         Button {
                             Task {
+                                internalNoteText = ""
+                                await vm.clearInternalNote(unitName: unit.unit_name)
+                                saveMessage = "Nota cancellata"
+                                
+                                try? await Task.sleep(nanoseconds: 1_200_000_000)
+                                saveMessage = ""
+                            }
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.gray.opacity(0.35), lineWidth: 1)
+                                    )
+                                
+                                Text("Cancella note")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 52)
+                        }
+                        .buttonStyle(.plain)
+                        
+                        Button {
+                            Task {
                                 await vm.completeUnit(unitName: unit.unit_name)
                                 if liveUnit.completed == false {
                                     internalNoteText = ""

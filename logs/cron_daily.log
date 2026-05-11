@@ -1308,3 +1308,274 @@ After doing this, you may fix the identity used for this commit with:
 To github.com:steai111/Housekeeping_Hub.git
    322d518..4077f87  main -> main
 === DONE ===
+=== DAILY SNAPSHOT START ===
+Sessione Beddy caricata correttamente.
+Sessione non valida o assente. Avvio login Beddy con OTP email automatica.
+Baseline inbox message id: 2455
+
+--- NUOVA MAIL CANDIDATA ---
+msg_id: 2456
+from: beddy <no-reply@beddy.io>
+subject: Il tuo pin di accesso per Beddy
+subject_ok: True
+from_ok: True
+BODY ESTRATTO:
+Il tuo pin di accesso per Beddy
+Gentile Ste San Felicissimo, questo è il pin da te richiesto per confermare l'accesso al tuo account di Beddy: 975079 Il tuo pin scadrà alle 15:20 support@beddy.io | +39 095 7167027 | app.beddy.io | Facebook | Youtube Copyright &copy; 2026 Beddy. All rights reserved
+otp_code estratto: 975079
+OTP recuperato automaticamente da Gmail: 975079
+URL durante attesa login OTP: https://app.beddy.io/tableau?start=2026-05-11
+Login completato e sessione aggiornata.
+Pagina pronta. URL corrente: https://app.beddy.io/tableau?start=2026-05-11
+URL finale reader: https://app.beddy.io/tableau?start=2026-05-11
+TITOLO PAGINA: Tableau | Beddy
+TARGET DATE ISO: 2026-05-11
+TARGET DAY: 11
+TARGET CHECK-IN RAW: 11 MAY 2026
+HEADER TROVATI NEL TABLEAU:
+2: MAGGIO 2026
+3: GIUGNO 2026 Avanti
+5: 11 LU
+6: 12 MA
+7: 13 ME
+8: 14 GI
+9: 15 VE
+10: 16 SA
+11: 17 DO
+12: 18 LU
+13: 19 MA
+14: 20 ME
+15: 21 GI
+16: 22 VE
+17: 23 SA
+18: 24 DO
+19: 25 LU
+20: 26 MA
+21: 27 ME
+22: 28 GI
+23: 29 VE
+24: 30 SA
+25: 31 DO
+26: 1 LU
+27: 2 MA
+28: 3 ME
+29: 4 GI
+30: 5 VE
+31: 6 SA
+32: 7 DO
+33: 8 LU
+34: 9 MA
+35: 10 ME
+36: 11 GI
+37: 12 VE
+38: 13 SA
+39: 14 DO
+40: 15 LU
+41: 16 MA
+42: 17 ME
+43: 18 GI
+44: 19 VE
+45: 20 SA
+HEADER GIORNI TROVATI NEL TABLEAU:
+1: 11 LU
+2: 12 MA
+3: 13 ME
+4: 14 GI
+5: 15 VE
+6: 16 SA
+7: 17 DO
+8: 18 LU
+9: 19 MA
+10: 20 ME
+11: 21 GI
+12: 22 VE
+13: 23 SA
+14: 24 DO
+15: 25 LU
+16: 26 MA
+17: 27 ME
+18: 28 GI
+19: 29 VE
+20: 30 SA
+21: 31 DO
+22: 1 LU
+23: 2 MA
+24: 3 ME
+25: 4 GI
+26: 5 VE
+27: 6 SA
+28: 7 DO
+29: 8 LU
+30: 9 MA
+31: 10 ME
+32: 11 GI
+33: 12 VE
+34: 13 SA
+35: 14 DO
+36: 15 LU
+37: 16 MA
+38: 17 ME
+39: 18 GI
+40: 19 VE
+41: 20 SA
+HEADER TARGET TROVATO: index=0
+BOX PRENOTAZIONE VISIBILI: 63
+RANGE X GIORNO 11: 465 -> 501
+BOX START DAY 11: index=1 name='KNESE LARS'
+BOX START DAY 11: index=12 name='PALMA GIUSEPPE'
+BOX START DAY 11: index=25 name='KURTH FLORIAN'
+BOX START DAY 11: index=33 name='ZACCARIA PIETRO'
+BOX START DAY 11: index=43 name='JOICHL MARIA'
+TOTALE BOX CHE INIZIANO IL GIORNO 11: 5
+
+=== BOX 1/5 DEL GIORNO 11 ===
+BOX TARGET: KNESE LARS (index=1)
+BOOKING RACCOLTA: {'booking_id': '5391926460', 'guest_name': 'LARS KNESE', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '1', 'checkin_date': '06 MAG 2026', 'checkout_date': '14 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 2/5 DEL GIORNO 11 ===
+BOX TARGET: PALMA GIUSEPPE (index=12)
+BOOKING RACCOLTA: {'booking_id': '6401131347', 'guest_name': 'Giuseppe Palma', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '2', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 3/5 DEL GIORNO 11 ===
+BOX TARGET: KURTH FLORIAN (index=25)
+BOOKING RACCOLTA: {'booking_id': '5068115622', 'guest_name': 'FLORIAN KURTH', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '3', 'checkin_date': '09 MAG 2026', 'checkout_date': '18 MAG 2026', 'country_raw': 'GERMANIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 4/5 DEL GIORNO 11 ===
+BOX TARGET: ZACCARIA PIETRO (index=33)
+BOOKING RACCOLTA: {'booking_id': '5160258777', 'guest_name': 'Pietro Zaccaria', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '4', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 5/5 DEL GIORNO 11 ===
+BOX TARGET: JOICHL MARIA (index=43)
+WARNING: telefono mancante nella pagina prenotazione
+BOOKING_ID: 8545080
+GUEST_NAME: MARIA JOICHL
+PAGE_URL: https://app.beddy.io/reservation/8545080?roomReservationId=85450802caad973ca88e2ce652f74ac28abf434
+BOOKING RACCOLTA: {'booking_id': '8545080', 'guest_name': 'MARIA JOICHL', 'accommodation_type': 'Appartamento Vite', 'room_number': '5', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'AUSTRIA', 'booking_status_raw': 'Confermata', 'beddy_notes': 'Camera x2'}
+Sessione Beddy caricata correttamente.
+Pagina pronta. URL corrente: https://app.beddy.io/tableau?start=2026-05-12
+URL finale reader: https://app.beddy.io/tableau?start=2026-05-12
+TITOLO PAGINA: Tableau | Beddy
+TARGET DATE ISO: 2026-05-12
+TARGET DAY: 12
+TARGET CHECK-IN RAW: 12 MAY 2026
+HEADER TROVATI NEL TABLEAU:
+2: MAGGIO 2026
+3: GIUGNO 2026 Avanti
+5: 12 MA
+6: 13 ME
+7: 14 GI
+8: 15 VE
+9: 16 SA
+10: 17 DO
+11: 18 LU
+12: 19 MA
+13: 20 ME
+14: 21 GI
+15: 22 VE
+16: 23 SA
+17: 24 DO
+18: 25 LU
+19: 26 MA
+20: 27 ME
+21: 28 GI
+22: 29 VE
+23: 30 SA
+24: 31 DO
+25: 1 LU
+26: 2 MA
+27: 3 ME
+28: 4 GI
+29: 5 VE
+30: 6 SA
+31: 7 DO
+32: 8 LU
+33: 9 MA
+34: 10 ME
+35: 11 GI
+36: 12 VE
+37: 13 SA
+38: 14 DO
+39: 15 LU
+40: 16 MA
+41: 17 ME
+42: 18 GI
+43: 19 VE
+44: 20 SA
+45: 21 DO
+HEADER GIORNI TROVATI NEL TABLEAU:
+1: 12 MA
+2: 13 ME
+3: 14 GI
+4: 15 VE
+5: 16 SA
+6: 17 DO
+7: 18 LU
+8: 19 MA
+9: 20 ME
+10: 21 GI
+11: 22 VE
+12: 23 SA
+13: 24 DO
+14: 25 LU
+15: 26 MA
+16: 27 ME
+17: 28 GI
+18: 29 VE
+19: 30 SA
+20: 31 DO
+21: 1 LU
+22: 2 MA
+23: 3 ME
+24: 4 GI
+25: 5 VE
+26: 6 SA
+27: 7 DO
+28: 8 LU
+29: 9 MA
+30: 10 ME
+31: 11 GI
+32: 12 VE
+33: 13 SA
+34: 14 DO
+35: 15 LU
+36: 16 MA
+37: 17 ME
+38: 18 GI
+39: 19 VE
+40: 20 SA
+41: 21 DO
+HEADER TARGET TROVATO: index=0
+BOX PRENOTAZIONE VISIBILI: 66
+RANGE X GIORNO 12: 465 -> 501
+BOX START DAY 12: index=1 name='KNESE LARS'
+BOX START DAY 12: index=12 name='PALMA GIUSEPPE'
+BOX START DAY 12: index=25 name='KURTH FLORIAN'
+BOX START DAY 12: index=33 name='ZACCARIA PIETRO'
+BOX START DAY 12: index=44 name='JOICHL MARIA'
+TOTALE BOX CHE INIZIANO IL GIORNO 12: 5
+
+=== BOX 1/5 DEL GIORNO 12 ===
+BOX TARGET: KNESE LARS (index=1)
+BOOKING RACCOLTA: {'booking_id': '5391926460', 'guest_name': 'LARS KNESE', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '1', 'checkin_date': '06 MAG 2026', 'checkout_date': '14 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 2/5 DEL GIORNO 12 ===
+BOX TARGET: PALMA GIUSEPPE (index=12)
+BOOKING RACCOLTA: {'booking_id': '6401131347', 'guest_name': 'Giuseppe Palma', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '2', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 3/5 DEL GIORNO 12 ===
+BOX TARGET: KURTH FLORIAN (index=25)
+BOOKING RACCOLTA: {'booking_id': '5068115622', 'guest_name': 'FLORIAN KURTH', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '3', 'checkin_date': '09 MAG 2026', 'checkout_date': '18 MAG 2026', 'country_raw': 'GERMANIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 4/5 DEL GIORNO 12 ===
+BOX TARGET: ZACCARIA PIETRO (index=33)
+BOOKING RACCOLTA: {'booking_id': '5160258777', 'guest_name': 'Pietro Zaccaria', 'accommodation_type': 'Camera Matrimoniale con vista panoramica', 'room_number': '4', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'ITALIA', 'booking_status_raw': 'Confermata', 'beddy_notes': ''}
+
+=== BOX 5/5 DEL GIORNO 12 ===
+BOX TARGET: JOICHL MARIA (index=44)
+WARNING: telefono mancante nella pagina prenotazione
+BOOKING_ID: 8545080
+GUEST_NAME: MARIA JOICHL
+PAGE_URL: https://app.beddy.io/reservation/8545080?roomReservationId=85450802caad973ca88e2ce652f74ac28abf434
+BOOKING RACCOLTA: {'booking_id': '8545080', 'guest_name': 'MARIA JOICHL', 'accommodation_type': 'Appartamento Vite', 'room_number': '5', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': 'AUSTRIA', 'booking_status_raw': 'Confermata', 'beddy_notes': 'Camera x2'}
+daily.json aggiornato correttamente: /Users/ste111/AI_SYSTEMS/San_Felicissimo/Housekeeping_Hub/data/daily.json
+=== GIT PUSH START ===

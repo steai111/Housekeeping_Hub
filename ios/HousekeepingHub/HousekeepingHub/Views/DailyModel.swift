@@ -119,6 +119,11 @@ final class DailyViewModel: ObservableObject {
         saveCache(response)
     }
     
+    func clearInternalNote(unitName: String) async {
+        
+        await saveInternalNote(unitName: unitName, note: "")
+    }
+    
     func completeUnit(unitName: String) async {
         
         guard let index = units.firstIndex(where: { $0.unit_name == unitName }) else {
@@ -134,7 +139,7 @@ final class DailyViewModel: ObservableObject {
             cleaning_task: oldUnit.cleaning_task,
             language: oldUnit.language,
             beddy_notes: oldUnit.beddy_notes,
-            internal_note: newCompleted ? "" : oldUnit.internal_note,
+            internal_note: oldUnit.internal_note,
             completed: newCompleted,
             is_room_override: oldUnit.is_room_override
         )
