@@ -1290,3 +1290,21 @@ PAGE_URL: https://app.beddy.io/reservation/8545080?roomReservationId=85450802caa
 BOOKING RACCOLTA: {'booking_id': '8545080', 'guest_name': 'Maria Joich', 'accommodation_type': 'Appartamento Vite', 'room_number': '5', 'checkin_date': '11 MAG 2026', 'checkout_date': '13 MAG 2026', 'country_raw': '', 'booking_status_raw': 'Confermata', 'beddy_notes': 'Camera x2'}
 daily.json aggiornato correttamente: /Users/ste111/AI_SYSTEMS/San_Felicissimo/Housekeeping_Hub/data/daily.json
 === GIT PUSH START ===
+[main 4077f87] auto daily snapshot 2026-05-10 15:02:08
+ Committer: Ste <ste111@Macmini.station>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 4 files changed, 315 insertions(+), 17 deletions(-)
+To github.com:steai111/Housekeeping_Hub.git
+   322d518..4077f87  main -> main
+=== DONE ===

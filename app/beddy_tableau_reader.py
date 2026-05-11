@@ -185,11 +185,14 @@ def read_day_bookings(offset_days: int = 1) -> List[Dict[str, Any]]:
             room_number = extracted.get("room_number", "").strip()
 
             if not booking_id:
-                print("SALTATO: booking_id vuoto")
                 detail_page.close()
                 page.wait_for_timeout(700)
                 _close_tableau_popup(page)
-                continue
+
+                raise RuntimeError(
+                    f"ERRORE CRITICO: booking_id vuoto per box '{current_name}' "
+                    f"nel giorno {target_day}. Run interrotta per evitare daily.json errato."
+                )
 
             dedupe_key = f"{booking_id}|{guest_name}|{room_number}"
 
