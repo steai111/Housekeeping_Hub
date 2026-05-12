@@ -1,7 +1,7 @@
 {
   "status": "ok",
-  "date": "12/05/2026",
-  "difficulty": "LIGHT",
+  "date": "13/05/2026",
+  "difficulty": "MEDIUM",
   "units": [
     {
       "unit_name": "camera 1",
@@ -15,8 +15,8 @@
     },
     {
       "unit_name": "camera 2",
-      "booking_status": "overnight",
-      "cleaning_task": "rassetto",
+      "booking_status": "check_out",
+      "cleaning_task": "smontare",
       "language": "IT",
       "beddy_notes": "",
       "internal_note": "",
@@ -35,9 +35,9 @@
     },
     {
       "unit_name": "camera 4",
-      "booking_status": "overnight",
-      "cleaning_task": "rassetto",
-      "language": "IT",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "ENG",
       "beddy_notes": "",
       "internal_note": "",
       "completed": false,
@@ -45,8 +45,8 @@
     },
     {
       "unit_name": "app 5",
-      "booking_status": "overnight",
-      "cleaning_task": "niente",
+      "booking_status": "check_out",
+      "cleaning_task": "smontare",
       "language": "ENG",
       "beddy_notes": "Camera x2",
       "internal_note": "",

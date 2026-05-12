@@ -61,7 +61,7 @@ final class DailyViewModel: ObservableObject {
                     language: remoteUnit.language,
                     beddy_notes: remoteUnit.beddy_notes,
                     internal_note: localUnit?.internal_note ?? remoteUnit.internal_note,
-                    completed: localUnit?.completed ?? remoteUnit.completed,
+                    completed: decoded.date != date ? false : (localUnit?.completed ?? remoteUnit.completed),
                     is_room_override: localUnit?.is_room_override ?? remoteUnit.is_room_override
                 )
             }
