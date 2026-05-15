@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "date": "15/05/2026",
+  "date": "16/05/2026",
   "difficulty": "MEDIUM",
   "units": [
     {
@@ -35,18 +35,18 @@
     },
     {
       "unit_name": "camera 4",
-      "booking_status": "overnight",
-      "cleaning_task": "rassetto",
-      "language": "IT",
-      "beddy_notes": "",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "ENG",
+      "beddy_notes": "letti singoli",
       "internal_note": "",
       "completed": false,
       "is_room_override": false
     },
     {
       "unit_name": "app 5",
-      "booking_status": "check_in",
-      "cleaning_task": "da_rifare",
+      "booking_status": "overnight",
+      "cleaning_task": "niente",
       "language": "ENG",
       "beddy_notes": "",
       "internal_note": "",
@@ -55,9 +55,9 @@
     },
     {
       "unit_name": "app 6",
-      "booking_status": "empty",
-      "cleaning_task": "niente",
-      "language": "-",
+      "booking_status": "check_in",
+      "cleaning_task": "da_rifare",
+      "language": "ENG",
       "beddy_notes": "",
       "internal_note": "",
       "completed": false,

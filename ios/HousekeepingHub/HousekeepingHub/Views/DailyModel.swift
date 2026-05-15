@@ -43,6 +43,9 @@ final class DailyViewModel: ObservableObject {
             return
         }
         
+        let localDateBeforeSync = date
+        let localUnitsBeforeSync = units
+        
         var request = URLRequest(url: url)
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.timeoutInterval = 60
@@ -51,8 +54,22 @@ final class DailyViewModel: ObservableObject {
             let (data, _) = try await URLSession.shared.data(for: request)
             let decoded = try JSONDecoder().decode(DailyResponse.self, from: data)
             
+            let isNewDay = decoded.date != localDateBeforeSync
+            
+            let remoteSignature = decoded.units.map {
+                "\($0.unit_name)|\($0.booking_status)|\($0.cleaning_task)|\($0.language)|\($0.beddy_notes)"
+            }.joined(separator: "||")
+            
+            let localSignature = localUnitsBeforeSync.map {
+                "\($0.unit_name)|\($0.booking_status)|\($0.cleaning_task)|\($0.language)|\($0.beddy_notes)"
+            }.joined(separator: "||")
+            
+            let snapshotChanged = remoteSignature != localSignature
+            
+            let shouldResetCompleted = isNewDay || snapshotChanged
+            
             let mergedUnits = decoded.units.map { remoteUnit in
-                let localUnit = units.first { $0.unit_name == remoteUnit.unit_name }
+                let localUnit = localUnitsBeforeSync.first { $0.unit_name == remoteUnit.unit_name }
                 
                 return DailyUnit(
                     unit_name: remoteUnit.unit_name,
@@ -61,7 +78,7 @@ final class DailyViewModel: ObservableObject {
                     language: remoteUnit.language,
                     beddy_notes: remoteUnit.beddy_notes,
                     internal_note: localUnit?.internal_note ?? remoteUnit.internal_note,
-                    completed: decoded.date != date ? false : (localUnit?.completed ?? remoteUnit.completed),
+                    completed: shouldResetCompleted ? false : (localUnit?.completed ?? remoteUnit.completed),
                     is_room_override: localUnit?.is_room_override ?? remoteUnit.is_room_override
                 )
             }
@@ -80,6 +97,7 @@ final class DailyViewModel: ObservableObject {
             saveCache(mergedResponse)
             
             print("Snapshot remoto sincronizzato:", decoded.date)
+            print("Reset completed:", shouldResetCompleted)
             
         } catch {
             print("Errore sync snapshot remoto:", error)
