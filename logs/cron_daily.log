@@ -2746,3 +2746,45 @@ BOOKING RACCOLTA: {'booking_id': '5205866313', 'guest_name': 'Francesca Olivarez
 daily.json aggiornato correttamente: /Users/ste111/AI_SYSTEMS/San_Felicissimo/Housekeeping_Hub/data/daily.json
 Notifica Telegram inviata correttamente.
 === GIT PUSH START ===
+[main 09c4bac] auto daily snapshot 2026-05-15 15:03:45
+ Committer: Ste <ste111@Macmini.station>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 5 files changed, 322 insertions(+), 13 deletions(-)
+To github.com:steai111/Housekeeping_Hub.git
+   0e0b4e9..09c4bac  main -> main
+=== DONE ===
+=== DAILY SNAPSHOT START ===
+Sessione Beddy caricata correttamente.
+Pagina pronta. URL corrente: https://app.beddy.io/tableau?start=2026-05-16
+URL finale reader: https://app.beddy.io/tableau?start=2026-05-16
+TITOLO PAGINA: Beddy
+TARGET DATE ISO: 2026-05-16
+TARGET DAY: 16
+TARGET CHECK-IN RAW: 16 MAY 2026
+HEADER TROVATI NEL TABLEAU:
+HEADER GIORNI TROVATI NEL TABLEAU:
+ERRORE: nessuna colonna trovata per il giorno 16
+Sessione Beddy caricata correttamente.
+Pagina pronta. URL corrente: https://app.beddy.io/tableau?start=2026-05-17
+URL finale reader: https://app.beddy.io/tableau?start=2026-05-17
+TITOLO PAGINA: Beddy
+TARGET DATE ISO: 2026-05-17
+TARGET DAY: 17
+TARGET CHECK-IN RAW: 17 MAY 2026
+HEADER TROVATI NEL TABLEAU:
+HEADER GIORNI TROVATI NEL TABLEAU:
+ERRORE: nessuna colonna trovata per il giorno 17
+daily.json aggiornato correttamente: /Users/ste111/AI_SYSTEMS/San_Felicissimo/Housekeeping_Hub/data/daily.json
+Notifica Telegram inviata correttamente.
+=== GIT PUSH START ===
